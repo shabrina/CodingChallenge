@@ -99,19 +99,26 @@ public class GalaxyMerchantTradingGuide {
 		String metalName = inputList.get(isPosition - 1);
 		int metalPosition = isPosition - 1;
 		isValid = true;
-		for(int i = 0; i < metalPosition; i++) {
-			if(inputMap.containsKey(inputList.get(i))) {
-				tmpRoman = tmpRoman + inputMap.get(inputList.get(i));
-			} else {
-				isValid = false;
-				System.out.println("Error mapping the value, value " + inputList.get(i) + " is not exist");
-				break;
-			}	
-		}
-		if(isValid) {
-			int resultRoman = romanToArabicConverter(tmpRoman);
-			double metalValue = (double) result/resultRoman;
-			metalMap.put(metalName, metalValue);
+		
+		
+		if(metalName.equals("Silver") || metalName.equals("Gold") || metalName.equals("Iron")) {
+			for(int i = 0; i < metalPosition; i++) {
+				if(inputMap.containsKey(inputList.get(i))) {
+					tmpRoman = tmpRoman + inputMap.get(inputList.get(i));
+				} else {
+					isValid = false;
+					System.out.println("Error mapping the value, value " + inputList.get(i) + " is not exist");
+					break;
+				}	
+			}
+			if(isValid) {
+				int resultRoman = romanToArabicConverter(tmpRoman);
+				double metalValue = (double) result/resultRoman;
+				metalMap.put(metalName, metalValue);
+			}
+		} else {
+			isValid = false;
+			System.out.println("There should not be any other words after Silver, Gold, Iron");
 		}
 	}
 	
